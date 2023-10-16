@@ -1,16 +1,28 @@
-# This is a sample Python script.
+import sys
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+num = int(input())
 
+stack = []
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+for i in range(num):
+    order = list(sys.stdin.readline().split())
+    if order[0] == "push":
+        stack.append(int(order[-1]))
+    elif order[0] == "pop":
+        if len(stack)==0:
+            print(-1)
+        else:
+            print(stack.pop())
+    elif order[0] == "size":
+        print(len(stack))
+    elif order[0] == "empty":
+        if len(stack)==0:
+            print(1)
+        else:
+            print(0)
+    else:
+        if len(stack)==0:
+            print(-1)
+        else:
+            print(stack[-1])
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
