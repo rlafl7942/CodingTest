@@ -4,6 +4,7 @@ from collections import deque
 n = int(input())
 
 # 시간 초과.. 
+# 리스트 옮기는데에 시간이 걸림
 # card = list(range(1,n+1))
 
 # while len(card)!=1:
