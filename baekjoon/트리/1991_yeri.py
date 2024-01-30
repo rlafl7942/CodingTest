@@ -1,16 +1,42 @@
-# This is a sample Python script.
+import sys
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+tree = {}
+class Node():
+    def __init__(self, data, left, right):
+        self.data = data
+        self.left = left
+        self.right = right
+
+def preOrder(node):
+    print(node.data, end='')
+    if node.left != '.':
+        preOrder(tree[node.left])
+    if node.right != '.':
+        preOrder(tree[node.right])
+
+def inOrder(node):
+    if node.left != '.':
+        inOrder(tree[node.left])
+    print(node.data, end='')
+    if node.right != '.':
+        inOrder(tree[node.right])
+
+def postOrder(node):
+    if node.left != '.':
+        postOrder(tree[node.left])
+    if node.right != '.':
+        postOrder(tree[node.right])
+    print(node.data, end='')
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+n = int(input())
 
+for _ in range(n):
+    a,b,c = sys.stdin.readline().rstrip().split()
+    tree[a] = Node(a,b,c)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+preOrder(tree['A'])
+print()
+inOrder(tree['A'])
+print()
+postOrder(tree['A'])
