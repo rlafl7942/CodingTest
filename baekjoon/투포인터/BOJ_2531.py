@@ -14,7 +14,7 @@ max_len = 0
 
 for i in range(0,n):
   check = set()
-  for j in range(4):
+  for j in range(k):
     check.add(sushi[(i+j)%n])
   if c not in check:
     check.add(c)
