@@ -24,4 +24,6 @@ for i in check:
     days = 0
     max_check = 0
 
+answer += max_check * days # 남은 일정들까지 처리
+
 print(answer)
