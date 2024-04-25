@@ -23,18 +23,15 @@ while queue:
     if 0<=nx<n and 0<=ny<m:
       if visited[nx][ny] == False:
         if castle[nx][ny] == 2:
-          gram_route = castle[x][y]+1 + (n-nx-1) + (m-ny-1)
+          res = castle[x][y]+1 + (n-nx-1) + (m-ny-1)
         if castle[nx][ny] != 1:
           castle[nx][ny] = castle[x][y] + 1
           queue.append([nx, ny])
           visited[nx][ny] = True
-      if nx == n-1 and ny == m-1:
-        res = min(gram_route,castle[n-1][m-1])
-        break
-# if castle[n-1][m-1] == 0 or min(gram_route,castle[n-1][m-1])>t:
-#   print("Fail")
-# else:
-#   print(min(castle[n-1][m-1], gram_route))
+
+if castle[n-1][m-1]:
+  res = min(res, castle[n-1][m-1])
+  
 if res > t or res == 0:
   print("Fail")
 else:
