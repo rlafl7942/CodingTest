@@ -1,25 +1,39 @@
-def solution(n, computers):  
-    def dfs(v):
-        visited[v] = True
-        for i in connected[v]:
-            if not visited[i]:
-                visited[i] = True
-                dfs(i)
+from collections import deque
+
+def solution(n, computers):
+    graph = [[] for _ in range(n)]
+    visited = [False] * n
+    q = deque()
     
-    connected = [[] for i in range(n)]
-    for i in range(n):
-        for j in range(i+1, n):
-            if computers[i][j] == 1:
-                connected[i].append(j)
-                connected[j].append(i) 
+    for i in range(len(computers)):
+        for j in range(len(computers[i])):
+            if i!=j:
+                if computers[i][j]==1:
+                    graph[i].append(j)
     
-    visited=[False] * n
-    answer = 0
-    for i in range(n):
-        if not visited[i]:
-            dfs(i)
-            answer +=1
+    def bfs(v):
+        q.append(v)
+        cnt=0
+        if visited[v] == False:
+            visited[v] = True
+           
+            while q:
+                tmp = q.popleft()
+                for i in graph[tmp]:
+                    if not visited[i]:
+                        q.append(i)
+                        cnt+=1
+                        visited[i] = True
+        return cnt
+
+    print(graph)
+    l=[]
+    for i in range(0, n):
+        tmp = bfs(i)
+        l.append(tmp)
     
-    return answer
+    return n-sum(l)
             
         
+        
+    
