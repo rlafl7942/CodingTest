@@ -1,21 +1,16 @@
 def solution(numbers, target):
-    answer = 0
-    tmp = [0]
-    for num in numbers:
-        tmp_2 = []
-        for i in tmp:
-            minus = i-num
-            plus = i+num
-            tmp_2.append(minus)
-            tmp_2.append(plus)
-        tmp = tmp_2
+    result = [[] for _ in range(len(numbers))]
     
-    for i in tmp:
+    result[0].append(0+numbers[0])
+    result[0].append(0-numbers[0])
+    for i in range(1, len(numbers)):
+        for j in range(len(result[i-1])):
+            result[i].append(result[i-1][j]+numbers[i])
+            result[i].append(result[i-1][j]-numbers[i])
+    
+    cnt=0
+    for i in result[len(result)-1]:
         if i==target:
-            answer+=1
+            cnt+=1
             
-    return answer
-            
-            
-            
-        
+    return cnt
