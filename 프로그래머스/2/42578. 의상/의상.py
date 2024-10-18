@@ -1,12 +1,11 @@
-from itertools import combinations
 from collections import defaultdict
 def solution(clothes):
-    cloth = defaultdict(list)
+    answer = 0
+    cloth = defaultdict(int)
     for value in clothes:
-        item, type = value[0], value[1]
-        cloth[type].append(item)
+        cloth[value[1]] += 1
     tmp = 1
-    for i in cloth:
-        tmp *= (len(cloth[i]) +1)
+    for value in cloth:
+        tmp *= (cloth[value]+1)
 
     return tmp-1
