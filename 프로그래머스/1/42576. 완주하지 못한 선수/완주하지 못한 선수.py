@@ -2,11 +2,10 @@ from collections import Counter
 def solution(participant, completion):
     answer = ''
     cnt = Counter(participant)
-    for i in completion:
-        if cnt[i]:
-            cnt[i]-=1
-    for i in participant:
-        if cnt[i] == 1:
-            return i
-    
+    for person in completion:
+        cnt[person] -= 1
+        if cnt[person] == 0:
+            cnt.pop(person)
+    for i in cnt:
+        answer += i
     return answer
