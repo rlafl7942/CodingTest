@@ -1,19 +1,19 @@
 def solution(progresses, speeds):
-    stack=[]
-    answer=[]
-    for i in range(0, len(progresses)):
-        days=0
-        while progresses[i] < 100:
-            progresses[i] += speeds[i]
-            days+=1
-        stack.append(days)
-        
-    maxCnt = stack[0]
+    answer = []
+    stack = []
+    for index, value in enumerate(progresses):
+        if (100 - value) % speeds[index] == 0:
+            stack.append((100 - value) // speeds[index])
+        else:
+            stack.append((100 - value) // speeds[index] + 1)
     print(stack)
-    cnt=1
-    for i in range(1, len(stack)):
-        if stack[i] > maxCnt:
-            maxCnt = stack[i]
+    max_cnt = stack[0]
+    cnt = 1
+    for index, days in enumerate(stack):
+        if index ==0:
+            continue
+        if days > max_cnt:
+            max_cnt = days
             answer.append(cnt)
             cnt=1
         else:
