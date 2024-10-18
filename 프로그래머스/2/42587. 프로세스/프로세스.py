@@ -1,25 +1,22 @@
 from collections import deque
-
 def solution(priorities, location):
-    index = deque()
-    order = []
-    queue = deque(priorities)
-
-    for i in range(len(priorities)):
-        index.append(i)
-    
-    maxP = max(queue)
-    indexCnt = 0
-    while queue:
-        if queue[0] >= maxP:
-            queue.popleft()
-            order.append(index.popleft())
-            if queue:
-                maxP = max(queue)
+    answer = 0
+    max_rank = max(priorities)
+    q = deque()
+    for index, value in enumerate(priorities):
+        q.append([index, value])
+        
+    cnt = 0
+    while q:
+        x = q.popleft()
+        loc, pri = x[0], x[1]
+        if pri == max(priorities):
+            if loc == location:
+                return cnt+1
+            priorities[loc] = -1
+            max_rank = max(priorities)
+            cnt += 1
         else:
-            tmp = queue.popleft()
-            queue.append(tmp)
-            index.append(index.popleft())
-    for i in range(len(order)):
-        if location == order[i]:
-            return (i+1)
+            q.append(x)
+    
+    return answer
